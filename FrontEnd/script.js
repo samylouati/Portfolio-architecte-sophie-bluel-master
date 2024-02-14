@@ -73,16 +73,19 @@ function DisplayCategories (categories) {
         btn_filter.appendChild(button); // gallery est parent de input
         button.innerText = categoriesS.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
 
+        // je veux une fonction sur chaque bouton qui affiche les projetS.categoryId = categoriesS.id
         button.addEventListener("click", function () { // pour chaque boutons, j'appelle la fonction FilterCategrory
-            FilterbyCategory(projetS, categoriesS.id);
+            FilterbyCategory(projetS.categoryId, categoriesS.id);
+
         })
     })};
 
-// Filtrer avec mes boutons
+// Filtrer avec mes boutons    
 
 function FilterbyCategory (projetS, categorieS) {
-    const projetSFiltres = projetS.filter (function (projetS) {
-        return projetS.categoryId === categorieS.id;
-        });
-        console.log(projetSFiltres);
-    };
+    const projetSFiltres = projetS.filter (function (projetS, categorieS) {
+    return projetS.categoryId === categorieS.id;
+});
+console.log(projetSFiltres)
+};
+
