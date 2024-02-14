@@ -15,7 +15,7 @@ function getApiWorks () {
     fetch (`${API_BASE_URL}/works`) // je recupere les travaux de l'architecte sur l'API
     .then ((response) => response.json()) // je veux ces travaux au format JSON
     .then (projets => {
-        console.log(projets); // je nome ces travaux "projets"
+        console.table(projets); // je nome ces travaux "projets"
         DisplayWorks(projets); // j"appelle ma fonction DisplayWorks
         getApiCategories(); // je recupere les categories apres avoir recuperer les travaux
     })
@@ -51,30 +51,38 @@ function getApiCategories () {
     .then ((response) => response.json()) // je veux ces catégories au format JSON
     .then (categories => {
         console.log(categories); // je nome ces catégories
-        // DisplayCategories(categories);
+        DisplayCategories(categories);
     })
     .catch ((error) => {console.error(error)
     })
 }
 
-// Fonction pour afficher les categories
+// Fonction pour afficher les categories et les boutons
 
-// function DisplayCategories (categories) { 
-//     const filter = document.getElementById("portfolio"); // je recupere l'id "portfolio" dans le DOM
-//     categories.forEach(categoriesS => { // pour chaque categorieS(ophie) : 
-//         const button = document.createElement("button"); // je crée un bouton pour chaque categories
-//         // class à mettre sur mes bouton de trie
-//         filter.appendChild(button); // gallery est parent de input
-//         button.innerText = categoriesS.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
-//     })};
+function DisplayCategories (categories) { 
+    const btn_filter = document.createElement("div"); // je creer une DIV pour mes filtres
+    const portfolio = document.getElementById("portfolio"); // je recupere l'id portfolio dans le DOM
+    const gallery = document.querySelector(".gallery"); // je recupere la div gallery pour cette fonction
+    portfolio.insertBefore(btn_filter,gallery); // je veux que mes boutons se placent avant la div gallery
+    // portfolio.appendChild(btn_filter); // portfolio est parent de btn_filter
+    btn_filter.classList.add("btn_filter"); // j'applique le style .btn_filter à la div btn_filter
+    
+    categories.forEach(categoriesS => { // pour chaque categorieS(ophie) : 
+        const button = document.createElement("button"); // je crée un bouton pour chaque categories
+        button.classList.add("btn")// class à mettre sur mes bouton de trie
+        btn_filter.appendChild(button); // gallery est parent de input
+        button.innerText = categoriesS.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
+
+        button.addEventListener("click", function () { // pour chaque boutons, j'appelle la fonction FilterCategrory
+            FilterbyCategory(projetS, categoriesS.id);
+        })
+    })};
 
 // Filtrer avec mes boutons
 
-const TrieObjets = document.querySelector('objet');
-
-TrieObjets.addEventListener("click", function () {
-    const objet_test = projets.filter( function (projet) {
-        return projet.id = 1;
-    });
-    console.log(objet_test)
-});
+function FilterbyCategory (projetS, categorieS) {
+    const projetSFiltres = projetS.filter (function (projetS) {
+        return projetS.categoryId === categorieS.id;
+        });
+        console.log(projetSFiltres);
+    };

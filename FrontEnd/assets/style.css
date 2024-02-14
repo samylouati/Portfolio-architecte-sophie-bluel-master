@@ -126,23 +126,30 @@ li:hover {
 	margin-bottom: 1em;
 }
 
+/* j'ajoute le style pour les boutons */
+
 .btn_filter {
-	height: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 50px;
+}
 
-	.btn {
-		height: 40px;
-		margin-left: 10px;
-		padding: 10px;
-		border: 1px solid #1D6154;
-		border-radius: 60px;
-		background-color: white;
-		font-family: 'Syne';
-		color: #1D6154;
-	}
+.btn {
+	height: 40px;
+	margin-left: 10px;
+	padding: 10px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	background-color: white;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+}
 
+#all {
+	background-color: #1D6154;
+	color: white;
 }
 
 .gallery {
