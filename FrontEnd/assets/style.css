@@ -126,24 +126,23 @@ li:hover {
 	margin-bottom: 1em;
 }
 
-.filter {
+.btn_filter {
+	height: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100px;
-	width: 100%;
 
-	button {
+	.btn {
 		height: 40px;
-		font-family: 'Syne';
-		font-weight: 700;
-		font-size: 16px;
-		color: #1D6154;
+		margin-left: 10px;
+		padding: 10px;
+		border: 1px solid #1D6154;
+		border-radius: 60px;
 		background-color: white;
-		text-align: center;
-		border: 1px #1D6154 solid;
-		border-radius: 60px ;
+		font-family: 'Syne';
+		color: #1D6154;
 	}
+
 }
 
 .gallery {
