@@ -3,6 +3,9 @@ console.log('yo') // pour verfifier si mon console.log fonctionne (f12) sur le n
 const API_BASE_URL = "http://localhost:5678/api"; // je crée cette variable pour l'url de base de l'API
 console.log(API_BASE_URL)
 
+getApiWorks(); // appel de la function à l'ouverture de la page
+getApiCategories(); // je recupere les categories apres avoir recuperer les travaux
+
 // pour recuperer les WORKS, je fais un fetch :
 // fetch (`URL de l'api à appeler`) // si j'arrive à communiquer avec l'API
 //     .then ((response) => response.json()) // alors je veux cette reponse en format json
@@ -12,23 +15,20 @@ console.log(API_BASE_URL)
 // Etape 1 du guide des étapes clés
 
 function getApiWorks () {
-    fetch (`${API_BASE_URL}/works`) // je recupere les travaux de l'architecte sur l'API
+   return fetch (`${API_BASE_URL}/works`) // je recupere les travaux de l'architecte sur l'API
     .then ((response) => response.json()) // je veux ces travaux au format JSON
     .then (works => {
         console.table(works); // je nome ces travaux "projets"
         DisplayWorks(works); // j"appelle ma fonction DisplayWorks
-        getApiCategories(); // je recupere les categories apres avoir recuperer les travaux
+        return data;
     })
     .catch ((error) => {console.error(error)
     })
 }
 
-getApiWorks(); // appel de la function à l'ouverture de la page
-
-
 // Fonction pour montrer les elements du tableau
 
-function DisplayWorks (works) {
+function DisplayWorks(works) {
     const gallery = document.querySelector(".gallery"); // je recupere la gallery dans le DOM
     works.forEach(work => { // pour chaque projetS(ophie) : 
         const figure = document.createElement("figure"); // je crée une balise <figure> pour chaque projet
@@ -67,25 +67,24 @@ function DisplayCategories (categories) {
     // portfolio.appendChild(btn_filter); // portfolio est parent de btn_filter
     btn_filter.classList.add("btn_filter"); // j'applique le style .btn_filter à la div btn_filter
     
-    categories.forEach(categoriesS => { // pour chaque categorieS(ophie) : 
+    categories.forEach(categorie => { // pour chaque categorieS(ophie) : 
         const button = document.createElement("button"); // je crée un bouton pour chaque categories
         button.classList.add("btn")// class à mettre sur mes bouton de trie
         btn_filter.appendChild(button); // gallery est parent de input
-        button.innerText = categoriesS.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
+        button.innerText = categorie.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
 
         // je veux une fonction sur chaque bouton qui affiche les projetS.categoryId = categoriesS.id
         button.addEventListener("click", function () { // pour chaque boutons, j'appelle la fonction FilterCategrory
-            FilterbyCategory(work.categoryId, categoriesS.id);
-
+    
+            FilterbyCategory(work.categoryId, categorie.id);
         })
     })};
 
 // Filtrer avec mes boutons    
 
-function FilterbyCategory (works, categoriesS) {
-    const worksFiltres = works.filter (function (works, categoriesS) {
-    return works.categoryId === categoriesS.id;
+function FilterbyCategory (works, ) {
+    const worksFiltres = works.filter (function (works, categories) {
+    return works.categoryId === categories.id;
 });
 console.log(worksFiltres)
 };
-
