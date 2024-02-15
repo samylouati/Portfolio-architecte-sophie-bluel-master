@@ -28,6 +28,13 @@ function getApiWorks() {
     })
 }
 
+// je stock les "works" recuperés dans cette variable
+let allWorks = []; 
+getApiWorks().then(works => {
+    allWorks = works; // je stock donc les works recuperer dans la variable allWorks
+    DisplayWorks(allWorks); // j'affiche tous les works initiaux
+})
+
 // Fonction pour montrer les elements du tableau "works"
 
 function DisplayWorks(works) {
@@ -77,14 +84,12 @@ function DisplayCategories(categories) {
 
         // je veux une fonction sur chaque bouton qui affiche "work.categoryId = categorie.id"
         button.addEventListener("click", function () { 
-            ClearWorks();
-            getApiWorks().then(function FilterbyCategory(works) { // pour chaque boutons, j'appelle la fonction FilterCategrory
-                const WorksFiltered = works.filter (work => work.categoryId === category.id);
-                console.log(WorksFiltered);
-                DisplayWorks(WorksFiltered); // je montre les "Works"
-            });
-        }); 
-    });
+            ClearWorks(); // jappel la fonction pour nettoyer la gallery
+            const WorksFiltered = allWorks.filter (work => work.categoryId === category.id);
+            console.log(WorksFiltered);
+            DisplayWorks(WorksFiltered); // je montre les "Works"
+        });
+    }); 
 };
 
 // Fonction pour filtrer avec mes boutons
