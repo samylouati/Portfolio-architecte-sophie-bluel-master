@@ -14,9 +14,9 @@ console.log(API_BASE_URL)
 function getApiWorks () {
     fetch (`${API_BASE_URL}/works`) // je recupere les travaux de l'architecte sur l'API
     .then ((response) => response.json()) // je veux ces travaux au format JSON
-    .then (projets => {
-        console.table(projets); // je nome ces travaux "projets"
-        DisplayWorks(projets); // j"appelle ma fonction DisplayWorks
+    .then (works => {
+        console.table(works); // je nome ces travaux "projets"
+        DisplayWorks(works); // j"appelle ma fonction DisplayWorks
         getApiCategories(); // je recupere les categories apres avoir recuperer les travaux
     })
     .catch ((error) => {console.error(error)
@@ -28,15 +28,15 @@ getApiWorks(); // appel de la function à l'ouverture de la page
 
 // Fonction pour montrer les elements du tableau
 
-function DisplayWorks (projets) {
+function DisplayWorks (works) {
     const gallery = document.querySelector(".gallery"); // je recupere la gallery dans le DOM
-    projets.forEach(projetS => { // pour chaque projetS(ophie) : 
+    works.forEach(work => { // pour chaque projetS(ophie) : 
         const figure = document.createElement("figure"); // je crée une balise <figure> pour chaque projet
         figure.classList.add('figure'); // j'applique le style 'figure sur chaque balise <figure>
         const images = document.createElement("img");
-        images.src = projetS.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
+        images.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
         const legend = document.createElement("figcaption"); // je crée la balise <figcaption>
-        legend.innerText = projetS.title; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
+        legend.innerText = work.title; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
         gallery.appendChild(figure); // gallery est parent de chaque <figure>
         figure.appendChild(images); // figure est parent de images
         figure.appendChild(legend); // figure est parent de legend    
@@ -75,17 +75,17 @@ function DisplayCategories (categories) {
 
         // je veux une fonction sur chaque bouton qui affiche les projetS.categoryId = categoriesS.id
         button.addEventListener("click", function () { // pour chaque boutons, j'appelle la fonction FilterCategrory
-            FilterbyCategory(projetS.categoryId, categoriesS.id);
+            FilterbyCategory(work.categoryId, categoriesS.id);
 
         })
     })};
 
 // Filtrer avec mes boutons    
 
-function FilterbyCategory (projetS, categorieS) {
-    const projetSFiltres = projetS.filter (function (projetS, categorieS) {
-    return projetS.categoryId === categorieS.id;
+function FilterbyCategory (works, categoriesS) {
+    const worksFiltres = works.filter (function (works, categoriesS) {
+    return works.categoryId === categoriesS.id;
 });
-console.log(projetSFiltres)
+console.log(worksFiltres)
 };
 
