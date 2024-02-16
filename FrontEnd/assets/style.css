@@ -145,11 +145,33 @@ li:hover {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #1D6154;
+	cursor: pointer;
+	transition: transform 0.5s;
+}
+.btn:hover {
+	color: white;
+	background-color: #1D6154;
+	transform: scale(1.1);
 }
 
-#all {
+.all {
 	background-color: #1D6154;
 	color: white;
+	height: 40px;
+	margin-left: 10px;
+	padding: 10px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	font-family: 'Syne';
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 0.5s;
+}
+
+.all:hover {
+	color: #1D6154;
+	background-color: white;
+	transform: scale(1.1);
 }
 
 .gallery {

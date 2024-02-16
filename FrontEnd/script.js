@@ -75,6 +75,10 @@ function DisplayCategories(categories) {
     const gallery = document.querySelector(".gallery"); // je recupere la <div> "gallery" pour cette fonction
     portfolio.insertBefore(btn_filter,gallery); // je veux que mes boutons se placent avant la <div> "gallery"
     btn_filter.classList.add("btn_filter"); // j'applique le style "".btn_filter" à la <div> "btn_filter"
+    const all = document.createElement("button"); // je crée un bouton "Tous"
+    all.classList.add("all"); // j'applique le style "all" au bouton 
+    all.innerText = "Tous"; // je met du texte : "Tous"
+    btn_filter.appendChild(all); // la <div> "btn_filter" est parent de "Tous"
     
     categories.forEach(category => { // pour chaque categorie dans categories : 
         const button = document.createElement("button"); // je crée un <bouton>
@@ -105,3 +109,5 @@ function ClearWorks() {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = "";
 }
+
+// Creation du boutons "Tous"
