@@ -21,7 +21,7 @@ function getApiWorks() {
     .then ((response) => response.json()) // je veux ces travaux au format JSON
     .then (works => {
         console.table(works); // je nome l'ensemble des travaux recuperer "works"
-        DisplayWorks(works); // j"appelle ma fonction DisplayWorks pour montrer les "works"
+        //DisplayWorks(works); // j"appelle ma fonction DisplayWorks pour montrer les "works" (en commentaire, sinon le DisplayWorks se fait deux fois)
         return works;
     })
     .catch ((error) => {console.error(error)
@@ -79,6 +79,12 @@ function DisplayCategories(categories) {
     all.classList.add("all"); // j'applique le style "all" au bouton 
     all.innerText = "Tous"; // je met du texte : "Tous"
     btn_filter.appendChild(all); // la <div> "btn_filter" est parent de "Tous"
+
+//EventListener pour afficher "Tous"
+    all.addEventListener("click", function () { 
+        ClearWorks(); // jappel la fonction pour nettoyer la gallery
+        DisplayWorks(allWorks); // je montre les "Works"
+    });
     
     categories.forEach(category => { // pour chaque categorie dans categories : 
         const button = document.createElement("button"); // je crée un <bouton>
@@ -110,4 +116,11 @@ function ClearWorks() {
     gallery.innerHTML = "";
 }
 
-// Creation du boutons "Tous"
+// Fonction pour afficher "Tous" les categories > intégré dans la fonction DisplayCategories
+
+// all.addEventListener("click", function () { 
+//     ClearWorks(); // jappel la fonction pour nettoyer la gallery
+//     const WorksFiltered = allWorks.filter (work => work.categoryId === category.id);
+//     console.log(WorksFiltered);
+//     DisplayWorks(WorksFiltered); // je montre les "Works"
+// });
