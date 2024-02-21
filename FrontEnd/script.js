@@ -124,3 +124,7 @@ function ClearWorks() {
 //     console.log(WorksFiltered);
 //     DisplayWorks(WorksFiltered); // je montre les "Works"
 // });
+
+// Etape 2 : creation de la page login
+
+//Etape 2.2 : administrer la conexion (fichier login.js)
