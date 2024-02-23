@@ -75,15 +75,16 @@ function DisplayCategories(categories) {
     const gallery = document.querySelector(".gallery"); // je recupere la <div> "gallery" pour cette fonction
     portfolio.insertBefore(btn_filter,gallery); // je veux que mes boutons se placent avant la <div> "gallery"
     btn_filter.classList.add("btn_filter"); // j'applique le style "".btn_filter" à la <div> "btn_filter"
-    const all = document.createElement("button"); // je crée un bouton "Tous"
-    all.classList.add("all"); // j'applique le style "all" au bouton 
-    all.innerText = "Tous"; // je met du texte : "Tous"
-    btn_filter.appendChild(all); // la <div> "btn_filter" est parent de "Tous"
+    const btn_all = document.createElement("button"); // je crée un bouton "Tous"
+    btn_all.classList.add("btn"); // j'applique le style "all" au bouton 
+    btn_all.innerText = "Tous"; // je met du texte : "Tous"
+    btn_filter.appendChild(btn_all); // la <div> "btn_filter" est parent de "Tous"
 
-//EventListener pour afficher "Tous"
-    all.addEventListener("click", function () { 
+    //EventListener pour afficher "Tous" les travaux
+    btn_all.addEventListener("click", function () { 
         ClearWorks(); // jappel la fonction pour nettoyer la gallery
         DisplayWorks(allWorks); // je montre les "Works"
+        btn_active(this);
     });
     
     categories.forEach(category => { // pour chaque categorie dans categories : 
@@ -98,9 +99,23 @@ function DisplayCategories(categories) {
             const WorksFiltered = allWorks.filter (work => work.categoryId === category.id);
             console.log(WorksFiltered);
             DisplayWorks(WorksFiltered); // je montre les "Works"
+            btn_active(this);
         });
     }); 
 };
+
+// Fonction pour afficher le bouton actif
+function btn_active (activeBtn) {
+    const all_btn = document.querySelectorAll('.btn');
+    all_btn.forEach(btn => {
+        if (btn === activeBtn) {
+            btn.classList.add('btn_active');
+        }
+        else {
+            btn.classList.remove('btn_active');
+        }})
+    };
+
 
 // Fonction pour filtrer avec mes boutons
 
@@ -113,7 +128,7 @@ function DisplayCategories(categories) {
 // Fonction pour supprimer les elements de la <div> "gallery"
 function ClearWorks() {
     const gallery = document.querySelector(".gallery");
-    gallery.innerHTML = "";
+    gallery.innerHTML = ""; //permet de tout supprimer dans la gallery à l'appel de la fonction
 }
 
 // Fonction pour afficher "Tous" les categories > intégré dans la fonction DisplayCategories
