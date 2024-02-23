@@ -7,14 +7,42 @@ const password = document.querySelector("#password"); // je recupere mon imput p
 const button = document.querySelector("#button");// je  recupere l'input se connecter
 console.log(email, password, button);
 
-const TextEmail = "sophie.bluel@test.tld";
-const TextPassword = "S0phie";
+const formulaire = document.querySelector("form"); // je recupere mon formulaire de ma page login
 
-button.addEventListener("click", function() {
-    if (email.value === TextEmail || password.value === TextPassword) { // si mail et password ok
-        console.log(index.HTML) //ouvrir l'index.html
-    }
-    else { 
-        console.log("L'email et/ou le mot de passe sont incorrect!")
-    }
-});
+//Fonction de conexion
+function login() {
+    const email = document.querySelector("#email").value; //je verifie si les element saisi dans input email sont ok
+    const password = document.querySelector("#password").value; //je verifie si les element saisi dans input password sont ok
+
+    let token = {
+        email: email,
+        password: password
+    };
+
+    fetch(`${API_BASE_URL}/users/login`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type" : 'application/json'
+        }
+    })
+    .then((response) => response.json())
+    .then(token => {
+        console.table(token)});
+        if (email.value === token || password.value === token) {
+            window
+        }
+}
+
+// const TextEmail = "sophie.bluel@test.tld";
+// const TextPassword = "S0phie";
+
+formulaire.addEventListener("submit", login() )
+// {
+//     if (email.value === TextEmail || password.value === TextPassword) { //je verifie si la valeur email et password correspond
+//         console.log(index.HTML) //ouvrir l'index.html
+//     }
+//     else { 
+//         console.log("L'email et/ou le mot de passe sont incorrect!")
+//     }
+// });
