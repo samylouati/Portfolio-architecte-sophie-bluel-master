@@ -8,41 +8,46 @@ const button = document.querySelector("#button");// je  recupere l'input se conn
 console.log(email, password, button);
 
 const formulaire = document.querySelector("form"); // je recupere mon formulaire de ma page login
+console.log(formulaire);
 
 //Fonction de conexion
 function login() {
-    const email = document.querySelector("#email").value; //je verifie si les element saisi dans input email sont ok
-    const password = document.querySelector("#password").value; //je verifie si les element saisi dans input password sont ok
+    const email = document.querySelector("#email").value; //je créé une variable pour la saisi de l'email
+    const password = document.querySelector("#password").value; //je créé une variable pour la saisi de password
 
-    let token = {
+    let data = {  // je crée la variable pour indiquer ce qu'il y a dans data
         email: email,
         password: password
     };
 
-    fetch(`${API_BASE_URL}/users/login`, {
+    const chargeUtile = JSON.stringify(data); // je crée une variable pour les données qui vont etre envoyé à l'API
+
+    // jenvoie les data sur l'API avec la method POST 
+    fetch (`${API_BASE_URL}/users/login`, {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: chargeUtile, // j'envoie les data en format JSON, l'API le lit en data, en passant par la variable crée plus haut 
         headers: {
-            "Content-Type" : 'application/json'
+            'Content-Type': 'application/json'
         }
+    }) 
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Il y a une erreur dans le mail et/ou le mot de passe'); // M'indique si il y a une erreur dans l'identifiant
+        }
+        return response.json(); // Me donne la reponse au format JSON si reponse ok
     })
-    .then((response) => response.json())
-    .then(token => {
-        console.table(token)});
-        if (email.value === token || password.value === token) {
-            window
-        }
-}
+    .then(data => {
+        localStorage.setItem('token', data.token); // je stocke le retour du token dans le localstorage
+        window.location.href = "index.html";
+    })
+    .catch ((error) => {
+        console.error(error)
+        alert("Identifiants invalides, veuillez reessayer!"); // fonction qui devrait afficher en pop up le message d'erreur
+    })
+};
 
-// const TextEmail = "sophie.bluel@test.tld";
-// const TextPassword = "S0phie";
-
-formulaire.addEventListener("submit", login() )
-// {
-//     if (email.value === TextEmail || password.value === TextPassword) { //je verifie si la valeur email et password correspond
-//         console.log(index.HTML) //ouvrir l'index.html
-//     }
-//     else { 
-//         console.log("L'email et/ou le mot de passe sont incorrect!")
-//     }
-// });
+// addEventListener pour écouter la fonction login 
+button.addEventListener('click', function(conexion) {
+    conexion.preventDefault();
+    login();
+});
