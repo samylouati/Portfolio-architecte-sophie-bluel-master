@@ -63,30 +63,6 @@ section {
 	margin: 50px 0
 }
 
-.edition_mode {
-	height: 59px;
-	max-width: none;
-	width: 100%;
-	background-color: black;
-	margin: 0px;
-	padding: 0px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.edition_mode i {
-	color: white;
-	padding-right: 10px;
-}
-
-.edition_mode p {
-	color: white;
-	font-family: 'Work Sans';
-	font-size: 16px;
-	font-weight: 400;
-}
-
 h1{
 	display: flex;
 	flex-direction: column;
@@ -154,55 +130,10 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 
-#portfolio h2 i a { /* je rajoute les memes reglages pour i et p */
+#portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
-
-#portfolio a {
-	text-decoration: none;
-	color: black;
-	padding-left: 10px;
-}
-
-/*je rajoute les reglages pour la div "modifier" */
-
-.modifier {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 2em;
-	gap: 20px;
-}
-
-.modale {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 50%;
-	left: 50%;
-	width: 50%;
-	background: rgba(0, 0, 0, 0.08);
-}
-
-.modale-wrapper {
-	background-color: white;
-	max-width: 50%;
-	height: 500px;
-}
-
-aside {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-aside img {
-	width: 80px;
-	height: 100px;
-}
-	
 	/* j'ajoute le style pour les boutons */
 
 .btn_filter {
@@ -331,7 +262,6 @@ footer nav ul {
 	font-family: 'Work Sans' ;
 	padding-left: 10px;
 }
-
 
 .login button {
 	font-family: 'Syne';

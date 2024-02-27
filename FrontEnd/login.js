@@ -38,7 +38,7 @@ function login() {
     })
     .then(data => {
         localStorage.setItem('token', data.token); // je stocke le retour du token dans le localstorage
-        window.location.href = "admin.html";
+        window.location.href = "index.html";
     })
     .catch ((error) => {
         console.error(error)
