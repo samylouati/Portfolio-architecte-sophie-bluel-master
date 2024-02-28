@@ -10,10 +10,17 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="script.js" defer></script>
+	<script src="https://kit.fontawesome.com/5011038c84.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-	
+
+	<!--Mode édition-->
+	<div class="edition_mode" style="display: none;" id="admin1">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
+
+<header>	
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
@@ -37,7 +44,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="title">
+			<h2>Mes Projets</h2>
+
+			<div class="modify" id="admin2" style="display: none;">
+				<a href=""><i class="fa-regular fa-pen-to-square"></i>modifier</a>
+			</div>
+		</div>
 
 		<!--je crée 4 boutons pour filtrer les projets-->
 
