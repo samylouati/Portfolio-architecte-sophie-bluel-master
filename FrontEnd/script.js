@@ -142,4 +142,27 @@ function ClearWorks() {
 
 // Etape 2 : creation de la page login
 
-//Etape 2.2 : administrer la conexion (fichier login.js)
+//Etape 2.2 : administrer la conexion (fichier login.js) + fonction pour verifier si le token est dans le localStorage
+
+document.addEventListener("DOMContentLoaded", function() { // appel de la fonction pour verifier si le token est dans le localstorage
+   
+    const token = localStorage.getItem('token'); // variable pour le token en localstorage
+
+    if (token) {
+        const elementAdmin1 = document.querySelector('#admin1'); // je recupere l'id de edition mode
+        const elementAdmin2 = document.querySelector('#admin2'); // je recupere l'id de l'element modifier
+        
+        if (elementAdmin1) {
+            elementAdmin1.style.display = 'flex'; // j'affiche edition mode si token dans local storage
+        }
+
+        if (elementAdmin2) {
+            elementAdmin2.style.display = 'inline'; // j'affiche l'element modifier
+        }
+    } else {
+        // si le token n'existe pas, rien à changer
+    }
+
+});
+
+
