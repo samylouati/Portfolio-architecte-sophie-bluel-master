@@ -32,7 +32,7 @@ function login() {
     }) 
     .then((response) => {
         if (!response.ok) {
-            throw new Error('Il y a une erreur dans le mail et/ou le mot de passe'); // M'indique si il y a une erreur dans l'identifiant
+            throw new Error('Erreur dans l’identifiant ou le mot de passe'); // M'indique si il y a une erreur dans l'identifiant
         }
         return response.json(); // Me donne la reponse au format JSON si reponse ok
     })

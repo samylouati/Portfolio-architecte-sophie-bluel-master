@@ -148,21 +148,23 @@ document.addEventListener("DOMContentLoaded", function() { // appel de la foncti
    
     const token = localStorage.getItem('token'); // variable pour le token en localstorage
 
-    if (token) {
-        const elementAdmin1 = document.querySelector('#admin1'); // je recupere l'id de edition mode
-        const elementAdmin2 = document.querySelector('#admin2'); // je recupere l'id de l'element modifier
+    if (token) { // si token dans localstorage, alors j'affiche les elements adminMode
         
-        if (elementAdmin1) {
-            elementAdmin1.style.display = 'flex'; // j'affiche edition mode si token dans local storage
-        }
+        const elementsadmin = document.querySelectorAll('.adminMode') // je recupere tous les elements adminMode pour rendre visible
 
-        if (elementAdmin2) {
-            elementAdmin2.style.display = 'inline'; // j'affiche l'element modifier
-        }
+        elementsadmin.forEach(element => {
+            element.style.display = 'flex';
+        });
+        
     } else {
         // si le token n'existe pas, rien à changer
     }
-
 });
 
+// Supprimer le token du localStorage en logout : 
 
+const logout = document.querySelector('#logout'); //je recupere mon id logout dans le DOM
+
+logout.addEventListener('click', function() { //evenement au click > supprime le token du localstorage
+    localStorage.removeItem('token');
+})
