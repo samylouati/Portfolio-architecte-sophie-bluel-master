@@ -171,17 +171,13 @@ logout.addEventListener('click', function() { //evenement au click > supprime le
 
 //Fonction pour DisplayWorskinModale :
 
-// function DisplayWorksInModale(worksInModale) {
-//     const gallery = document.querySelector(".gallery"); // je recupere la "gallery" dans le DOM
-//     works.forEach(work => { // pour chaque "work" dans "works" : 
-//         const figure = document.createElement("figure"); // je crée une balise <figure>
-//         figure.classList.add("figure"); // j'applique le style "figure" sur chaque balise <figure>
-//         const images = document.createElement("img");
-//         images.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
-//         const legend = document.createElement("figcaption"); // je crée la balise <figcaption>
-//         legend.innerText = work.title; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
-//         gallery.appendChild(figure); // "gallery" est parent de chaque <figure>
-//         figure.appendChild(images); // <figure> est parent de <images>
-//         figure.appendChild(legend); // <figure> est parent de <legend>  
-//     })
-// };
+function DisplayWorksInModale(works) {
+    const galleryModale = document.querySelector(".galleryModale"); // je recupere la "galleryModale" dans le DOM
+    works.forEach(work => { // pour chaque "work" dans "works" : 
+        const figureModale = document.createElement("figure"); // je crée une balise <figure>
+        const images = document.createElement("img");
+        images.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
+        figureModale.appendChild(images); // <figure> est parent de <images>
+        galleryModale.appendChild(figureModale);
+    })
+};
