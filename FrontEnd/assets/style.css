@@ -319,7 +319,7 @@ footer nav ul {
 }
 
 .login a {
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	color: #3d3d3d;
 	text-align: center;
 }
@@ -337,12 +337,7 @@ footer nav ul {
 	z-index: 1000;
 }
 
-.display {
-	display: flex;
-}
-
 .modale {
-	display: flex;
 	width: 35%;
 	height: 650px;
 	background-color: white;
@@ -350,38 +345,35 @@ footer nav ul {
 }
 
 .modaleDelete {
-	display: none;
+	display: flex;
 	flex-direction: column;
 	align-items: center;	
 	padding: 20px;
 	border-radius: 10px;
 }
 
-.modaleTitle {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
-	width: 100%;
-	padding-top: 20px;
-	}
+.modaleAdd {
+	display: none;
+	flex-direction: column;
+}
+
+.modaleAdd .icons {
+	display: flex;
+	justify-content: space-between;
+	padding: 30px;
+}
+
+.icons i {
+	font-size: 20px;
+}
 
 .modaleTitle h2 {
 	padding-top: 30px;
-	grid-area: 1 / 1 / 2 / 3; 
 	color: black;
 	text-align: center;
 	font-family: 'Work Sans';
 	font-size: 26px;
 	font-weight: 400;
-
-}
-
-.modaleTitle i {
-	grid-area: 1 / 2 / 2 / 3; 
-	font-size: 24px;
-	padding: 0px 20px 0px 90%;	
 }
 
 .galleryModale {
@@ -396,11 +388,7 @@ footer nav ul {
 }
 
 .photosModale {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(4, 1fr);
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
+	
 	padding: 30px 10px 0px 0px;
 }
 		
@@ -426,6 +414,16 @@ footer nav ul {
 	color: white;
 	background-color: #1D6154;
 	width: 100%;
+	padding: 0px 50px;
+	margin-top: 50px;
+}
+
+.btn_valider {
+	height: 36px;
+	border: none;
+	border-radius: 60px;
+	color: white;
+	background-color: #a7a7a7;
 	padding: 0px 50px;
 	margin-top: 50px;
 }
