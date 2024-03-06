@@ -1,12 +1,17 @@
 console.log('modale yo') // fichier script modale ok !
 
-const API_BASE_URL = "http://localhost:5678/api"; // je crée cette variable pour l'url de base de l'API
+//je recupere les elements dont j'aurais besoin dans le DOM pour les modales
 
-//je recupere les elements dont j'aurais besoin dans le DOM 
+//Fonction pour afficher les travaux dans la modale 
 
-const modalesContainer = document.querySelector("modalesContainer"); //la div qui contient les modales
-// const modaleDelete = document.querySelector("modaleDelete"); //la modale qui permet de supprimer les projets
-// const modaleAdd = document.querySelector("modaleAdd"); //la modale qui permet d'ajouter des projets
-// const galleryModale = document.querySelector("galleryModale");//la div qui affiche les projets dans la modale
-// const BtnModify = document.querySelector("modify"); //je cible le bouton "modifier" qui a pour id "admin2"
-// console.log(BtnModify);
+function DisplayWorksInModale(works) {
+    const galleryModale = document.querySelector(".galleryModale"); //Je cible galleryModale dans le DOM
+    works.forEach(work => { // pour chaque "work" dans "works" : 
+        const article = document.createElement("article"); // je crée une balise <article>
+        article.classList.add("photosModale"); // j'applique le style "photosModale" sur chaque balise <article>
+        const imagesModale = document.createElement("img");
+        imagesModale.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
+        galleryModale.appendChild(article); // "gallery" est parent de chaque <figure>
+        article.appendChild(imagesModale); // <figure> est parent de <images>
+    })
+};
