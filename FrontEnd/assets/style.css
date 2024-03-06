@@ -346,29 +346,71 @@ footer nav ul {
 	background-color: white;
 	padding: 20px;
 	border-radius: 10px;
-	overflow: scroll;
-	gap: 75px;
 }
 
-.modale h2 {
-	color: black;
-	font-family: 'Work Sans';
+.modaleTitle {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	width: 100%;
+	}
+
+.modaleTitle h2 {
+	padding-top: 20px;
+	grid-area: 1 / 1 / 2 / 3; 
 	text-align: center;
-	font-size: 26px;
-	font-weight: 400;
 }
 
-.modale .galleryModale img{
-	height: 100px;
-	width: 30%;
-	
+.modaleTitle i {
+	grid-area: 1 / 2 / 2 / 3; 
+	font-size: 24px;
+	padding-left: 350px;	
 }
 
-.modale .btn {
+.galleryModale {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-content: center;
+	width: 70%;
+	padding: 20px 0px 50px 0px;
+	border-bottom: #3d3d3d 1px solid;
+	margin-left: 10%;
+}
+
+.photosModale {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	padding: 30px 10px 0px 0px;
+}
+		
+.photosModale img {
+	grid-area: 1 / 1 / 5 / 3; 
+	height: 105px;
+}
+
+.photosModale i {
+	font-size: 13px;
+	grid-area: 1 / 2 / 2 / 3;
+	color: white;
+	background-color: black;
+	width: 15px;
+	height: 15px;
+	margin-top: 4px;
+	margin-left: 18px;
+	padding: 3px 0px 0px 2px;
+	border-radius: 2px;
+}
+
+.modaleDelete .btn {
+	color: white;
 	background-color: #1D6154;
-	color: white;	
-}
-
-.modale i {
-	
+	width: 100%;
+	padding: 0px 50px;
+	margin-top: 50px;
 }
