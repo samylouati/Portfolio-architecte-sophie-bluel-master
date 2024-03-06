@@ -337,15 +337,20 @@ footer nav ul {
 	z-index: 1000;
 }
 
+.display {
+	display: flex;
+}
+
 .modale {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 50%;
+	width: 35%;
 	height: 650px;
 	background-color: white;
 	padding: 20px;
 	border-radius: 10px;
+	overflow: hidden;
 }
 
 .modaleTitle {
@@ -355,18 +360,24 @@ footer nav ul {
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
 	width: 100%;
+	padding-top: 20px;
 	}
 
 .modaleTitle h2 {
-	padding-top: 20px;
+	padding-top: 30px;
 	grid-area: 1 / 1 / 2 / 3; 
+	color: black;
 	text-align: center;
+	font-family: 'Work Sans';
+	font-size: 26px;
+	font-weight: 400;
+
 }
 
 .modaleTitle i {
 	grid-area: 1 / 2 / 2 / 3; 
 	font-size: 24px;
-	padding-left: 350px;	
+	padding: 0px 20px 0px 90%;	
 }
 
 .galleryModale {
