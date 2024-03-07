@@ -168,3 +168,6 @@ const logout = document.querySelector('#logout'); //je recupere mon id logout da
 logout.addEventListener('click', function() { //evenement au click > supprime le token du localstorage
     localStorage.removeItem('token');
 })
+
+//addEvendListener pour ouvrir la modale 
+
