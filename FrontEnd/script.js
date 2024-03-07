@@ -197,16 +197,17 @@ function DisplayWorksInModale(works) {
         article.classList.add("photosModale"); // j'applique le style "photosModale" sur chaque balise <article>
         const imagesModale = document.createElement("img");
         imagesModale.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
+        imagesModale.setAttribute('id', `${work.id}`);// je leur assigne l'id correspondant le tableau work
         const icons = document.createElement('button');
-        icons.setAttribute('id', `${work.id}`);
-        icons.classList.add("fa-solid", "fa-trash-can", "trashBtn");
+        icons.setAttribute('id', `${work.id}`);// je leur assigne l'id correspondant le tableau work
+        icons.classList.add("fa-solid", "fa-trash-can", "trashBtn");   
         article.appendChild(icons);
-        article.appendChild(imagesModale); // <figure> est parent de <images>
+        article.appendChild(imagesModale);
         galleryModale.appendChild(article);
         console.log(icons);
+        console.log(imagesModale);
     })
 };
-
 
 //function displayworksinmodale version Seb :
 // function DisplayWorksInModale(works) {
@@ -254,7 +255,7 @@ const closeModaleAdd = document.querySelector("#closeModaleAdd");
 
 closeModaleAdd.addEventListener('click', function() {
     const modale = document.querySelector('.modalesContainer');
-    const modaleAdd = document.querySelector('.modale.modaleDelete');
+    const modaleAdd = document.querySelector('.modale.modaleAdd');
     const modaleDelete = document.querySelector('.modale.modaleDelete');
 
     modale.style.display = "none";
@@ -273,3 +274,5 @@ btnPrevious.addEventListener('click', function() {
     modaleAdd.style.display = 'none';
     modaleDelete.style.display = 'flex';
 });
+
+//Fonction pour supprimer les elements dans la modaleDelete

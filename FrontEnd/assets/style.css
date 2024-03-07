@@ -339,7 +339,7 @@ footer nav ul {
 
 .modale {
 	display: none;
-	width: 35%;
+	width: 50%;
 	max-height: 100%;
 	background-color: white;
 	overflow: hidden;
@@ -355,6 +355,7 @@ footer nav ul {
 
 .modaleDelete .icons {
 	padding-left: 90%;
+	padding-bottom: 30px;
 }
 
 .modaleAdd {
@@ -363,6 +364,47 @@ footer nav ul {
 	align-items: center;
 	border-radius: 10px;
 	padding: 20px;
+}
+
+.post {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 3px;
+	background-color: #e8f1f6;
+	height: 170px;
+	width: 50%;
+}
+
+.post i {
+	font-size: 76px;
+	width: 76px;
+	height: 76px;
+	color: #B9C5CC;
+	padding-top: 15px;
+	padding-bottom: 10px;
+}
+
+input[type="file"] {
+	text-align: center;
+	border-radius: 50px;
+	color: #306685;
+	background-color: #CBD6DC;
+	font-family: "Work Sans";
+	font-size: 14px;
+	font-weight: 500;
+	padding: 10px 33px;
+	border: none;
+	cursor: pointer;
+}
+
+.post p {
+	padding-top: 10px;
+	color: #444;
+	text-align: center;
+	font-family: 'Work Sans';
+	font-size: 10px;
+	font-weight: 400;
 }
 
 .modaleAdd .icons {
@@ -378,7 +420,7 @@ footer nav ul {
 }
 
 .modaleTitle h2 {
-	padding-top: 30px;
+	padding-bottom: 30px;
 	color: black;
 	text-align: center;
 	font-family: 'Work Sans';
@@ -392,7 +434,7 @@ footer nav ul {
 	justify-content: flex-start;
 	align-content: center;
 	width: 70%;
-	padding: 20px 0px 50px 0px;
+	padding: 15px 0px 50px 0px;
 	border-bottom: #3d3d3d 1px solid;
 	margin-left: 10%;
 }
@@ -417,11 +459,11 @@ footer nav ul {
 	color: white;
 	background-color: black;
 	border: none;
-	width: 14px;
-	height: 14px;
+	width: 17px;
+	height: 17px;
 	margin-top: 2px;
-	margin-left: 22px;
-	padding: 0px 2px;
+	margin-left: 20px;
+	padding: 0px 3px;
 	border-radius: 2px;
 	grid-area: 1 / 2 / 2 / 3; 
 	z-index: 2000;
