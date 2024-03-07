@@ -195,17 +195,42 @@ function DisplayWorksInModale(works) {
     works.forEach(work => { // pour chaque "work" dans "works" : 
         const article = document.createElement("article"); // je crée une balise <article>
         article.classList.add("photosModale"); // j'applique le style "photosModale" sur chaque balise <article>
+       
         const imagesModale = document.createElement("img");
         imagesModale.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
-        imagesModale.setAttribute('id', `${work.id}`);// je leur assigne l'id correspondant le tableau work
+        
         const icons = document.createElement('button');
         icons.setAttribute('id', `${work.id}`);// je leur assigne l'id correspondant le tableau work
         icons.classList.add("fa-solid", "fa-trash-can", "trashBtn");   
+        
+        //addEventListener pour supprimer :
+        icons.addEventListener('click', function(event) {
+            event.preventDefault(); // evite le rechargement de la page
+
+            const workId = work.id;
+            //Index pour cibler l'element à supprimer dans le tableau works :
+            const indexToRemove = works.findIndex(item => item.id === workId);
+            if (indexToRemove !== -1) {
+                //supprimer l'element du tableau works
+                works.splice(indexToRemove, 1);
+                //supprimer l'<article> correspondant de la modale
+                article.remove();
+                //appel de la fonction pour supprimer l'element de l'API
+                deleteWork(work.id);
+
+                //verifier s'il reste d'autres articles dans la modale pour eviter qu'elle ne se ferme
+                const remainingArticles = document.querySelectorAll('.photosModale');
+                if (remainingArticles.length === 0) {
+                    //aucun article restant, fermer la modale
+                    const modale = document.querySelector('modalesContainer');
+                    modale.style.display = 'none';
+                }
+            }
+        });
+
         article.appendChild(icons);
         article.appendChild(imagesModale);
         galleryModale.appendChild(article);
-        console.log(icons);
-        console.log(imagesModale);
     })
 };
 
@@ -291,4 +316,44 @@ modalesContainer.addEventListener('click', function(event) {
     }
 });
 
-//Fonction pour supprimer les elements dans la modaleDelete
+//Fonction pour supprimer les elements dans la modaleDelete (ajouter à la modalDelete en addEventListener)
+
+function deleteWork(workId) {
+    fetch(`${API_BASE_URL}/works/${workId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la supression du travail');
+        }
+        console.log('travail supprimer avec succès');
+    })
+    .catch(error => {
+        if (error.name !== 'AbortError') {
+            console.error('Erreur lors de la suppression :', error);
+        }
+    });
+}
+
+//fonction pour recharger les elements apres la reconnexion :
+function reloadWorks() {
+
+    //recharge des works
+    getApiCategories().then(works => {
+        allWorks = works;
+        DisplayWorks(allWorks);
+        DisplayWorksInModale(allWorks);
+    });
+
+    //recharge des categories
+    getApiCategories();
+}
+
+//logique de connexion
+function login() {
+
+    reloadWorks();
+}
