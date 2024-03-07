@@ -172,7 +172,20 @@ logout.addEventListener('click', function() { //evenement au click > supprime le
 
 //addEvendListener pour ouvrir la modale 
 
-//afficher la modale
+const modify = document.querySelector('#admin2');
+
+modify.addEventListener('click', function(event) {
+    event.preventDefault(); // pour eviter de recharger la page
+
+    const modale = document.querySelector('.modalesContainer');
+    const modaleDelete = document.querySelector('.modale.modaleDelete')
+    const modaleAdd = document.querySelector('.modale.modaleAdd');
+
+    modale.style.display = "flex";
+    modaleDelete.style.display = "flex";
+    modaleAdd.style.display = "none";
+
+});
 
 //Fonction pour afficher les travaux dans la modale 
 
@@ -185,10 +198,78 @@ function DisplayWorksInModale(works) {
         const imagesModale = document.createElement("img");
         imagesModale.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
         const icons = document.createElement('button');
-        //icons.setAttribute('id', `${work.id}`);
-        icons.classList.add("fa-trash-can");
+        icons.setAttribute('id', `${work.id}`);
+        icons.classList.add("fa-solid", "fa-trash-can", "trashBtn");
         article.appendChild(icons);
-        galleryModale.appendChild(article); // "gallery" est parent de chaque <figure>
         article.appendChild(imagesModale); // <figure> est parent de <images>
+        galleryModale.appendChild(article);
+        console.log(icons);
     })
 };
+
+
+//function displayworksinmodale version Seb :
+// function DisplayWorksInModale(works) {
+//      const galleryModale = document.querySelector(".galleryModale"); //Je cible galleryModale dans le DOM
+//      let html = "" ;
+//      works.forEach(work => {
+//         html += `<article class="photosModale">
+//             <img src="${work.imageUrl}" >
+//             <i class="fa-solid fa-trash"></i>
+//         </article>`;
+//      })
+//      galleryModale.innerHTML = html;
+// }
+
+//addEventListener pour fermer la modale : 
+
+const closeModaleDelete = document.querySelector("#closeModaleDelete");
+
+closeModaleDelete.addEventListener('click', function() {
+    const modale = document.querySelector('.modalesContainer');
+    const modaleDelete = document.querySelector('.modale.modaleDelete');
+
+    modale.style.display = "none";
+    modaleDelete.style.display = "none";
+});
+
+//fonction pour ouvrir la modaleAdd
+
+const btnAddPhotos = document.querySelector('#addPhoto');
+
+btnAddPhotos.addEventListener('click', function() {
+
+    const modale = document.querySelector('.modalesContainer');
+    const modaleAdd = document.querySelector('.modale.modaleAdd');
+    const modaleDelete = document.querySelector('.modale.modaleDelete');
+
+    modale.style.display = "flex";
+    modaleAdd.style.display = "flex";
+    modaleDelete.style.display = "none";
+});
+
+//function pour fermer la modaleAdd
+
+const closeModaleAdd = document.querySelector("#closeModaleAdd");
+
+closeModaleAdd.addEventListener('click', function() {
+    const modale = document.querySelector('.modalesContainer');
+    const modaleAdd = document.querySelector('.modale.modaleDelete');
+    const modaleDelete = document.querySelector('.modale.modaleDelete');
+
+    modale.style.display = "none";
+    modaleAdd.style.display = "none";
+    modaleDelete.style.display = "none";
+});
+
+//function pour revenir sur la modale Delete à partir de la modale Add
+
+const btnPrevious = document.querySelector('#previous');
+
+btnPrevious.addEventListener('click', function() {
+    const modaleAdd = document.querySelector('.modale.modaleAdd');
+    const modaleDelete = document.querySelector('.modale.modaleDelete');
+
+    modaleAdd.style.display = 'none';
+    modaleDelete.style.display = 'flex';
+});

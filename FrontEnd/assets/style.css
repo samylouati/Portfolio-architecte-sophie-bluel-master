@@ -325,7 +325,7 @@ footer nav ul {
 }
 
 .modalesContainer {
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	position: fixed;
@@ -338,15 +338,15 @@ footer nav ul {
 }
 
 .modale {
-	display: flex;
+	display: none;
 	width: 35%;
-	height: 650px;
+	max-height: 100%;
 	background-color: white;
 	overflow: hidden;
 }
 
 .modaleDelete {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;	
 	padding: 20px;
@@ -374,6 +374,7 @@ footer nav ul {
 
 .icons i {
 	font-size: 20px;
+	cursor: pointer;
 }
 
 .modaleTitle h2 {
@@ -398,24 +399,33 @@ footer nav ul {
 
 .photosModale {
 	padding: 30px 10px 0px 0px;
+	
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
 }
 		
 .photosModale img {
-	grid-area: 1 / 1 / 5 / 3; 
 	height: 105px;
+	grid-area: 1 / 1 / 2 / 3;
 }
 
-.photosModale i {
-	font-size: 13px;
-	grid-area: 1 / 2 / 2 / 3;
+.trashBtn {
+	font-size: 10px;
 	color: white;
 	background-color: black;
-	width: 15px;
-	height: 15px;
-	margin-top: 4px;
-	margin-left: 18px;
-	padding: 3px 0px 0px 2px;
+	border: none;
+	width: 14px;
+	height: 14px;
+	margin-top: 2px;
+	margin-left: 22px;
+	padding: 0px 2px;
 	border-radius: 2px;
+	grid-area: 1 / 2 / 2 / 3; 
+	z-index: 2000;
+	cursor: pointer;
 }
 
 .modaleDelete .btn {
