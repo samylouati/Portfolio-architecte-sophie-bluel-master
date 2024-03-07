@@ -275,4 +275,20 @@ btnPrevious.addEventListener('click', function() {
     modaleDelete.style.display = 'flex';
 });
 
+//Fonction pour fermer les modales en cliquant en dehors de celles ci :
+
+const modalesContainer = document.querySelector('.modalesContainer');
+
+modalesContainer.addEventListener('click', function(event) {
+    //je verifie si l'element cliqué est la div modalesContainer elle meme
+    if(event.target === modalesContainer) {
+        //si c'est le cas, fermez toutes les modales et masquer modalesContainer
+        const modales = document.querySelectorAll('.modale');
+        modales.forEach(modale => {
+            modale.style.display = 'none';
+        });
+        modalesContainer.style.display = 'none'
+    }
+});
+
 //Fonction pour supprimer les elements dans la modaleDelete
