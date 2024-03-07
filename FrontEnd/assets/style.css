@@ -325,7 +325,7 @@ footer nav ul {
 }
 
 .modalesContainer {
-	display: none;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: fixed;
@@ -346,7 +346,7 @@ footer nav ul {
 }
 
 .modaleDelete {
-	display: none;
+	display: flex;
 	flex-direction: column;
 	align-items: center;	
 	padding: 20px;
@@ -358,7 +358,7 @@ footer nav ul {
 }
 
 .modaleAdd {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
 	border-radius: 10px;

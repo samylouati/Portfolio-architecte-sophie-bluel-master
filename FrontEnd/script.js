@@ -33,6 +33,7 @@ let allWorks = [];
 getApiWorks().then(works => {
     allWorks = works; // je stock donc les works recuperer dans la variable allWorks
     DisplayWorks(allWorks); // j'affiche tous les works initiaux
+    DisplayWorksInModale(allWorks);
 })
 
 // Fonction pour montrer les elements du tableau "works"
@@ -171,3 +172,23 @@ logout.addEventListener('click', function() { //evenement au click > supprime le
 
 //addEvendListener pour ouvrir la modale 
 
+//afficher la modale
+
+//Fonction pour afficher les travaux dans la modale 
+
+function DisplayWorksInModale(works) {
+    const galleryModale = document.querySelector(".galleryModale"); //Je cible galleryModale dans le DOM
+   console.log(works);
+    works.forEach(work => { // pour chaque "work" dans "works" : 
+        const article = document.createElement("article"); // je crée une balise <article>
+        article.classList.add("photosModale"); // j'applique le style "photosModale" sur chaque balise <article>
+        const imagesModale = document.createElement("img");
+        imagesModale.src = work.imageUrl; // j'indique que le chemin des images est "imageUrl" dans le tableau
+        const icons = document.createElement('button');
+        //icons.setAttribute('id', `${work.id}`);
+        icons.classList.add("fa-trash-can");
+        article.appendChild(icons);
+        galleryModale.appendChild(article); // "gallery" est parent de chaque <figure>
+        article.appendChild(imagesModale); // <figure> est parent de <images>
+    })
+};
