@@ -362,8 +362,30 @@ footer nav ul {
 	display: none;
 	flex-direction: column;
 	align-items: center;
+	justify-content: flex-start;
 	border-radius: 10px;
 	padding: 20px;
+}
+
+.modaleLabel {
+	padding: 30px 0px 10px;
+	width: 50%;
+	color: #3D3D3D;
+	font-weight: 500;
+}
+
+input[type="text"], select {
+	width: 50%;
+	height: 50px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+}
+
+.border-bot {
+	height: 1px;
+	width: 50%;
+	background-color: #b3b3b3;
+	margin: 40px 0px 30px;
 }
 
 .post {
@@ -385,7 +407,21 @@ footer nav ul {
 	padding-bottom: 10px;
 }
 
-input[type="file"] {
+.custom-file-input {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.custom-file-input input[type="file"] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.custom-file-input label {
 	text-align: center;
 	border-radius: 50px;
 	color: #306685;
@@ -399,7 +435,7 @@ input[type="file"] {
 }
 
 .post p {
-	padding-top: 10px;
+	padding-top: 20px;
 	color: #444;
 	text-align: center;
 	font-family: 'Work Sans';
@@ -431,12 +467,9 @@ input[type="file"] {
 .galleryModale {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-content: center;
-	width: 70%;
-	padding: 15px 0px 50px 0px;
-	border-bottom: #3d3d3d 1px solid;
-	margin-left: 10%;
+	justify-content: space-around;
+	width: 50%;
+	padding: 15px 0px;
 }
 
 .photosModale {
@@ -468,6 +501,11 @@ input[type="file"] {
 	grid-area: 1 / 2 / 2 / 3; 
 	z-index: 2000;
 	cursor: pointer;
+	transition: transform 0.5s;
+}
+
+.trashBtn:hover {
+	transform: scale(1.1);
 }
 
 .modaleDelete .btn {
@@ -485,9 +523,9 @@ input[type="file"] {
 	color: white;
 	background-color: #a7a7a7;
 	padding: 0px 50px;
-	margin-top: 50px;
 	cursor: pointer;
 	transition: transform 0.5s;
+	border-top: 1px solid #b3b3b3;
 }
 
 .btn_valider:hover {

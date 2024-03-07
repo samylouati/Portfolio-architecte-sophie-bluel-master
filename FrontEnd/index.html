@@ -30,6 +30,8 @@
 				<!--gallery generer par js-->
 
 			</div>
+
+			<div class="border-bot"></div>
 			<div class="btns">
 				<button class="btn" id="addPhoto">Ajouter une photo</button>
 			</div>
@@ -44,14 +46,26 @@
 			<div class="modaleTitle">
 				<h2>Ajout photo</h2>
 			</div>
+			
 
-			<div class="post">
-				<i class="fa-regular fa-image"></i>
-				<input type="file" id="file" name="file" accept="image/*"><br>
-				<p>jpg, png : 4mo max</p>
-			</div>
+				<div class="post">
+					<i class="fa-regular fa-image"></i>
+					<div class="custom-file-input">
+						<input type="file" id="file" name="file" accept="image/*"><br>
+						<label for="file">+Ajouter photo</label>
+					</div>
+						<p>jpg, png : 4mo max</p>
+				</div>
+				<label for="titlePhoto" class="modaleLabel">Titre</label>
+				<input type="text" id="title" placeholder="">
 
-			<input type="text" id="title">
+				<label for="categoryPhoto" class="modaleLabel">Catégorie</label>
+				<select name="category" id="categoryPhoto">
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hotels et restaurants</option>
+				</select>
+				<div class="border-bot"></div>
 
 
 
