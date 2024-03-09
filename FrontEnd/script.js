@@ -338,22 +338,5 @@ function deleteWork(workId) {
     });
 }
 
-//fonction pour recharger les elements apres la reconnexion :
-function reloadWorks() {
+//Envoie de nouveaux projets 
 
-    //recharge des works
-    getApiCategories().then(works => {
-        allWorks = works;
-        DisplayWorks(allWorks);
-        DisplayWorksInModale(allWorks);
-    });
-
-    //recharge des categories
-    getApiCategories();
-}
-
-//logique de connexion
-function login() {
-
-    reloadWorks();
-}
