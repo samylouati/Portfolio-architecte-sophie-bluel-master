@@ -338,5 +338,62 @@ function deleteWork(workId) {
     });
 }
 
-//Envoie de nouveaux projets 
 
+
+//Envoie de nouveaux projets 
+//ajout de l'image dans la modaleAdd(fais avec ChatGPT)
+const fileInput = document.querySelector('file');
+const postDiv = document.querySelector('.post');
+
+fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const imgElement = document.createElement('img');
+        imgElement.src = e.target.result;
+        postDiv.innerHTML = ''//efface le contenu precedent
+        postDiv.appendChild(imgElement);
+    };
+
+    reader.readAsDataURL(file);
+});
+
+// fetch POST
+
+const formAdd = document.querySelector('.modaleAdd');
+
+formAdd.addEventListener('submit', function(event) {
+    event.preventDefault(); // evite de recharger la page 
+
+    const formData = new FormData(this); //pour creer un objet avec les resultats du formulaire
+    const fileInput = document.querySelector('#file');
+    const file = fileInput.files[0];
+
+    //ajouter d'autres données au FormData si besoin
+    formData.append('file', file);//ajoute le fichier à FormData
+
+ fetch (`${API_BASE_URL}/application/json`, { 
+     method: "POST",
+     headers: {
+         Authorization: `Bearer ${localStorage.token}`,
+     },
+
+     body: formData // j'aurais laissé "JSON.stringify" sans ChatGPT 
+    })
+//         "id": 0,
+//         "title": "string",
+//         "imageUrl": "string",
+//         "categoryId": "string",
+//         "userId": 0,
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur pendant ajout');
+        }
+        console.log('Travail ajouté avec succès');
+    })
+    .catch(error => {
+        console.error('Erreur pendant ajout: ', error);
+    });
+})
