@@ -374,7 +374,7 @@ footer nav ul {
 	font-weight: 500;
 }
 
-input[type="text"], select {
+.modaleAdd input[type="text"], select {
 	width: 50%;
 	height: 50px;
 	border: none;
@@ -516,7 +516,7 @@ input[type="text"], select {
 	margin-top: 50px;
 }
 
-.btn_valider {
+#btn_valider {
 	height: 36px;
 	border: none;
 	border-radius: 60px;
@@ -528,6 +528,6 @@ input[type="text"], select {
 	border-top: 1px solid #b3b3b3;
 }
 
-.btn_valider:hover {
+#btn_valider:hover {
 	transform: scale(1.1);
 }

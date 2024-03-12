@@ -338,62 +338,51 @@ function deleteWork(workId) {
     });
 }
 
+//Envoie de nouveaux projets :
+const btnValider = document.querySelector('#btn_valider')
 
+btnValider.addEventListener('click', function(event){
+    event.preventDefault();
 
-//Envoie de nouveaux projets 
-//ajout de l'image dans la modaleAdd(fais avec ChatGPT)
-const fileInput = document.querySelector('file');
-const postDiv = document.querySelector('.post');
+    //je recupere les valeurs du formulaire :
+    const title = document.querySelector('#title').value;
+    const categoryId = document.querySelector('#categoryId').value;
+    const imageUrl = document.querySelector('#imageUrl').files[0];
 
-fileInput.addEventListener('change', function() {
-    const file = this.files[0];
-    const reader = new FileReader();
+    // creation d'objet FormData pour envoyer les données
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('categroyId', categoryId);
+    formData.append('image', imageUrl);
 
-    reader.onload = function(e) {
-        const imgElement = document.createElement('img');
-        imgElement.src = e.target.result;
-        postDiv.innerHTML = ''//efface le contenu precedent
-        postDiv.appendChild(imgElement);
-    };
+    //fonction Fetch POST
 
-    reader.readAsDataURL(file);
-});
-
-// fetch POST
-
-const formAdd = document.querySelector('.modaleAdd');
-
-formAdd.addEventListener('submit', function(event) {
-    event.preventDefault(); // evite de recharger la page 
-
-    const formData = new FormData(this); //pour creer un objet avec les resultats du formulaire
-    const fileInput = document.querySelector('#file');
-    const file = fileInput.files[0];
-
-    //ajouter d'autres données au FormData si besoin
-    formData.append('file', file);//ajoute le fichier à FormData
-
- fetch (`${API_BASE_URL}/application/json`, { 
-     method: "POST",
-     headers: {
-         Authorization: `Bearer ${localStorage.token}`,
-     },
-
-     body: formData // j'aurais laissé "JSON.stringify" sans ChatGPT 
+    fetch(`${API_BASE_URL}/works`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+        },
+        body: formData
     })
-//         "id": 0,
-//         "title": "string",
-//         "imageUrl": "string",
-//         "categoryId": "string",
-//         "userId": 0,
-
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur pendant ajout');
+        if(!response.ok) {
+            throw new Error ('Erreur lors de ajout du travail');
         }
-        console.log('Travail ajouté avec succès');
+        console.log('Travail ajouter avec succès!');
+        //Raffraichir la galerie des travaux pour afficher les nouveaux projets ajoutée
+        getApiWorks().then(works => {
+            allWorks = works;
+            ClearWorks();// nettoyer la gallerie
+            DisplayWorks(allWorks);//afficher les travaux mis à jours
+            getApiCategories().then(categories => {
+                clearCategories(); // nettoyer les categories existantes
+                DisplayCategories(categories); //afficher les categories mis à jours
+            })
+        });
     })
     .catch(error => {
-        console.error('Erreur pendant ajout: ', error);
+        console.error('Erreur lors ajout : ', error);
     });
-})
+});
+
+//ajout de l'image dans la modaleAdd(fais avec ChatGPT)
