@@ -516,7 +516,7 @@ footer nav ul {
 	margin-top: 50px;
 }
 
-#btn_valider {
+.modaleAdd input[type="submit"] {
 	height: 36px;
 	border: none;
 	border-radius: 60px;
@@ -528,6 +528,6 @@ footer nav ul {
 	border-top: 1px solid #b3b3b3;
 }
 
-#btn_valider:hover {
+.modaleAdd input[type="submit"]:hover {
 	transform: scale(1.1);
 }
