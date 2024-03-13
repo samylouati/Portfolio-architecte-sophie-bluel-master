@@ -338,22 +338,81 @@ function deleteWork(workId) {
     });
 }
 
-//afficher l'image chargée dans la modaleAdd : 
+//afficher l'image chargée dans la modaleAdd :
 
 function imageUpload(event) {
+    event.preventDefault();//Empeche le formulaire de se soumettre automatiquement
+
     const file = event.target.files[0]; //recupere le fichier selectionné
     const imageUrl = URL.createObjectURL(file); //créer une URL pour le fichier selectionné
     const uploadImage = document.querySelector('#uploadImage')//je recupere l'image dans le DOM
     const icon = document.querySelector('#iconToHide');//icone à  cacher au chargement de l'image
-    const btn = document.querySelector('#btnToHide');//btn à cacher au chargement de l'image
+    const btnToHide = document.querySelector('#btnToHide');//btn à cacher au chargement de l'image
 
     //mettre à jours l'attribut src de l'element img avec l'URL de l'image chargée
+    //+ affiche l'image et cache l'icone / input
     uploadImage.src = imageUrl;
     uploadImage.style.display = 'block'; //pour aficher l'image
     icon.style.display = 'none'; //pour cacher l'icone
-    btn.style.display = 'none'; // pour cacher le bouton
+    btnToHide.style.display = 'none'; // pour cacher le bouton
 }
 
-//ecouter les changements dans l'input file pour le chargement d'image 
+//function pour valider le formulaire :
+function DataToUpload() {
+    const title = document.querySelector('#title').value.trim(); //recupere la valeur de 'title'
+    const categoryId = document.querySelector('#categoryId').value; //recupere la valeur de 'categoryId'
+
+    //verifie si title et categorie sont remplis
+    if (!title || !categoryId) {
+        alert('veuillez completer le titre et la categorie');
+        return; //stop la fonction si les champs sont vides
+    }
+
+    const formData = new FormData(); //creer un objet formData pour envoyer les données vers l'API
+    const file = document.querySelector('#imageUrl').files[0];//recupere l'image selectionné
+    
+    //les elements qui doivent etre envoyé :
+        //"id": 0,
+        //"title": "string",
+        //"imageUrl": "string",
+        //"categoryId": "string",
+        //"userId": 0
+
+    formData.append('title', title);//ajoute le fichier à l'objet FormData avec la clé 'title'
+    formData.append('imageUrl', file);
+    formData.append('categoryId',categoryId);
+
+    //envoie des donnée fetch 'POST'
+    fetch(`${API_BASE_URL}/works`, {
+        method:"POST",
+        body: formData, //envoie de l'objet formData contenant titre + image + categoryId
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`//ajoute le token pour autorisation
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Image a été ajouté avec succès!');
+        } else {
+            //si la reponse n'est pas ok, aficher un message d'erreur en JSON
+            response.json().then(data => {
+                alert('erreur lors de lenvoi : ${data.message}');
+            }).catch(error => {
+                console.error('Echec de l envoie', response.statusText);
+                alert('Erreur lord de lenvoie');
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors de l envoie de l image : ', error);
+        alert('erreur lors de lenvoie');
+    });
+}
+
+//AddEventListener pour le chargement de l'image 
 const imageUrlInput = document.querySelector('#imageUrl');
 imageUrlInput.addEventListener('change', imageUpload);
+
+//AddEventListener pour valider l'envoie
+const btnValider = document.querySelector('#btn_valider');
+btnValider.addEventListener('click', DataToUpload);
