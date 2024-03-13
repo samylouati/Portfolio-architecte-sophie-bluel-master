@@ -338,51 +338,22 @@ function deleteWork(workId) {
     });
 }
 
-//Envoie de nouveaux projets :
-const btnValider = document.querySelector('#btn_valider')
+//afficher l'image chargée dans la modaleAdd : 
 
-btnValider.addEventListener('click', function(event){
-    event.preventDefault();
+function imageUpload(event) {
+    const file = event.target.files[0]; //recupere le fichier selectionné
+    const imageUrl = URL.createObjectURL(file); //créer une URL pour le fichier selectionné
+    const uploadImage = document.querySelector('#uploadImage')//je recupere l'image dans le DOM
+    const icon = document.querySelector('#iconToHide');//icone à  cacher au chargement de l'image
+    const btn = document.querySelector('#btnToHide');//btn à cacher au chargement de l'image
 
-    //je recupere les valeurs du formulaire :
-    const title = document.querySelector('#title').value;
-    const categoryId = document.querySelector('#categoryId').value;
-    const imageUrl = document.querySelector('#imageUrl').files[0];
+    //mettre à jours l'attribut src de l'element img avec l'URL de l'image chargée
+    uploadImage.src = imageUrl;
+    uploadImage.style.display = 'block'; //pour aficher l'image
+    icon.style.display = 'none'; //pour cacher l'icone
+    btn.style.display = 'none'; // pour cacher le bouton
+}
 
-    // creation d'objet FormData pour envoyer les données
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('categroyId', categoryId);
-    formData.append('image', imageUrl);
-
-    //fonction Fetch POST
-
-    fetch(`${API_BASE_URL}/works`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${localStorage.token}`,
-        },
-        body: formData
-    })
-    .then(response => {
-        if(!response.ok) {
-            throw new Error ('Erreur lors de ajout du travail');
-        }
-        console.log('Travail ajouter avec succès!');
-        //Raffraichir la galerie des travaux pour afficher les nouveaux projets ajoutée
-        getApiWorks().then(works => {
-            allWorks = works;
-            ClearWorks();// nettoyer la gallerie
-            DisplayWorks(allWorks);//afficher les travaux mis à jours
-            getApiCategories().then(categories => {
-                clearCategories(); // nettoyer les categories existantes
-                DisplayCategories(categories); //afficher les categories mis à jours
-            })
-        });
-    })
-    .catch(error => {
-        console.error('Erreur lors ajout : ', error);
-    });
-});
-
-//ajout de l'image dans la modaleAdd(fais avec ChatGPT)
+//ecouter les changements dans l'input file pour le chargement d'image 
+const imageUrlInput = document.querySelector('#imageUrl');
+imageUrlInput.addEventListener('change', imageUpload);
