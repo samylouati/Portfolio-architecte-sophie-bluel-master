@@ -357,10 +357,16 @@ function imageUpload(event) {
     btnToHide.style.display = 'none'; // pour cacher le bouton
 }
 
+    //AddEventListener pour le chargement de l'image 
+    const imageUrlInput = document.querySelector('#imageUrl');
+    imageUrlInput.addEventListener('change', imageUpload);
+
 //function pour valider le formulaire :
 function DataToUpload() {
     const title = document.querySelector('#title').value.trim(); //recupere la valeur de 'title'
     const categoryId = document.querySelector('#categoryId').value; //recupere la valeur de 'categoryId'
+    const file = document.querySelector('#imageUrl').files[0];//recupere l'image selectionné
+    const formData = new FormData(); //creer un objet formData pour envoyer les données vers l'API
 
     //verifie si title et categorie sont remplis
     if (!title || !categoryId) {
@@ -368,9 +374,6 @@ function DataToUpload() {
         return; //stop la fonction si les champs sont vides
     }
 
-    const formData = new FormData(); //creer un objet formData pour envoyer les données vers l'API
-    const file = document.querySelector('#imageUrl').files[0];//recupere l'image selectionné
-    
     //les elements qui doivent etre envoyé :
         //"id": 0,
         //"title": "string",
@@ -409,10 +412,6 @@ function DataToUpload() {
     });
 }
 
-//AddEventListener pour le chargement de l'image 
-const imageUrlInput = document.querySelector('#imageUrl');
-imageUrlInput.addEventListener('change', imageUpload);
-
-//AddEventListener pour valider l'envoie
-const btnValider = document.querySelector('#btn_valider');
-btnValider.addEventListener('click', DataToUpload);
+    //AddEventListener pour valider l'envoie
+    const btnValider = document.querySelector('#btn_valider');
+    btnValider.addEventListener('click', DataToUpload);
