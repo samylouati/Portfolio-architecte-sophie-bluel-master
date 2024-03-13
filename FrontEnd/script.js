@@ -117,7 +117,6 @@ function btn_active (activeBtn) {
         }})
     };
 
-
 // Fonction pour filtrer avec mes boutons
 
 // j'insert la fonction en entier dans l'EventListener car probleme avec category qui n'est pas definit
@@ -360,3 +359,93 @@ function imageUpload(event) {
     //AddEventListener pour le chargement de l'image 
     const imageUrlInput = document.querySelector('#imageUrl');
     imageUrlInput.addEventListener('change', imageUpload);
+
+//gerer l'envoie vers l'API :
+const btnValidateAdd = document.querySelector('#btn_valider');
+btnValidateAdd.addEventListener('click', function(event) {
+    event.preventDefault();//pour empecher le formulaire de soumaitre automatiquement
+
+    //je recupere les valeurs des titres et categories
+    const title = document.querySelector('#title').value;
+    const category = document.querySelector('#categoryId').value;
+
+    //je recupere le fichier image
+    const file = document.querySelector('#imageUrl').files[0];
+
+    //je verifie si les champs titre, categorie et l'image sont present
+    if(title.trim() ==='' || category.trim() ==='' || !file) {
+        alert('Veuillez compléter les champs(image, titre et catégorie');
+        return; //je stop la fonction si les champs sont manquant
+    }
+
+    //creation des objets formData pour envoyer les données
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('category', category);
+    formData.append('image', file);
+
+    //Envoie des données vers l'API 
+
+    fetch(`${API_BASE_URL}/works`, {
+        method: "POST",
+        body: formData,
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+        }        
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de lenvoie du nouveau projet')
+        }
+        return response.json();
+    })
+    .then(data => {
+        //traité la reponse de l'API
+        console.log('Reponse : ', data);
+        //affichage d'un message 
+        alert('Votre projet a été enregistré avec succès!')
+    })
+    .then(newWork => {
+        //mettre à jours les nouveau projets :
+        allWorks.push(newWork);//ajout de la nouvelle image aux projets existant
+        DisplayWorks([newWork]);//afficher la nouvelle image sur le site
+        DisplayWorksInModale([newWork]);//afficher la nouvelle image dans la modale
+        modale.style.display = 'none';
+        modaleAdd.style.display = 'none';
+    })
+    .catch(error => {
+        console.error('Erreur lors de lenvoie de limage :', error);
+    });
+});
+
+//customisation de l'ajout des projets : 
+const btnValidateAdd2 = document.querySelector('#btn_valider');
+
+//selections des champs d'entrée :
+const titleInput = document.querySelector('#title');
+const categoryInput = document.querySelector('#categoryId');
+const imageInput = document.querySelector('#imageUrl');
+
+//fonction pour verifier si tous les elements sont remplis:
+function checkInput() {
+    const titleValue = titleInput.value.trim();
+    const categoryValue = categoryInput.value.trim();
+    const imageValue = imageInput.files[0];
+
+    //verifier si tous les champs requis sont remplis 
+    if (titleValue !== '' && categoryValue !== '' && imageValue) {
+        //tous les champs sont rempli, activer le bouton valider
+        btnValidateAdd2.disabled = false;
+        btnValidateAdd2.classList.add('active');
+        btnValidateAdd2.classList.remove('inactive');
+    } else {
+        //au moins un champ est vide, desactiver le bouton :
+        btnValidateAdd2.disabled = true;
+        btnValidateAdd2.classList.remove('active');
+    }
+}
+
+//addEventListener pour surveiller les changements dans les champs d'entrée
+titleInput.addEventListener('input', checkInput);
+categoryInput.addEventListener('change', checkInput);
+imageInput.addEventListener('change', checkInput);
