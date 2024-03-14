@@ -1,15 +1,7 @@
 console.log('yo') // pour verfifier si mon console.log fonctionne (f12) sur le navigateur
 
-// pour recuperer les WORKS, je fais un fetch :
-// fetch (`URL de l'api à appeler`) // si j'arrive à communiquer avec l'API
-//     .then ((response) => response.json()) // alors je veux cette reponse en format json
-//     .then ((data) => {console.log(data) }) // traduit moi cette reponse (data) pour verifier que ce soit la bonne reposne 
-//     .catch ((error) => {console.error(error); }); // si tu n'y arrives pas, donne moi l'erreur
-
 const API_BASE_URL = "http://localhost:5678/api"; // je crée cette variable pour l'url de base de l'API
 console.log(API_BASE_URL)
-
-// Etape 1 du guide des étapes clés
 
 getApiWorks(); // appel de la function pour recuperer les travaux à l'ouverture de la page
 getApiCategories(); // appel de la fonction pour les categories à l'ouverture de la page
@@ -21,7 +13,6 @@ function getApiWorks() {
     .then ((response) => response.json()) // je veux ces travaux au format JSON
     .then (works => {
         console.table(works); // je nome l'ensemble des travaux recuperer "works"
-        //DisplayWorks(works); // j"appelle ma fonction DisplayWorks pour montrer les "works" (en commentaire, sinon le DisplayWorks se fait deux fois)
         return works;
     })
     .catch ((error) => {console.error(error)
@@ -33,7 +24,7 @@ let allWorks = [];
 getApiWorks().then(works => {
     allWorks = works; // je stock donc les works recuperer dans la variable allWorks
     DisplayWorks(allWorks); // j'affiche tous les works initiaux
-    DisplayWorksInModale(allWorks);
+    DisplayWorksInModale(allWorks); //les works seront afficher dans la modale
 })
 
 // Fonction pour montrer les elements du tableau "works"
@@ -52,8 +43,6 @@ function DisplayWorks(works) {
         figure.appendChild(legend); // <figure> est parent de <legend>  
     })
 };
-
-// Etape 1.2 du guide des étapes clés
 
 // Fonction pour recuperer les categories
 
@@ -117,45 +106,22 @@ function btn_active (activeBtn) {
         }})
     };
 
-// Fonction pour filtrer avec mes boutons
-
-// j'insert la fonction en entier dans l'EventListener car probleme avec category qui n'est pas definit
-// function FilterbyCategory(works) {
-//     const WorksFiltered = works.filter (work => work.categoryId === category.id);
-//     console.log(WorksFiltered)
-// };
-
 // Fonction pour supprimer les elements de la <div> "gallery"
 function ClearWorks() {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = ""; //permet de tout supprimer dans la gallery à l'appel de la fonction
 }
 
-// Fonction pour afficher "Tous" les categories > intégré dans la fonction DisplayCategories
-
-// all.addEventListener("click", function () { 
-//     ClearWorks(); // jappel la fonction pour nettoyer la gallery
-//     const WorksFiltered = allWorks.filter (work => work.categoryId === category.id);
-//     console.log(WorksFiltered);
-//     DisplayWorks(WorksFiltered); // je montre les "Works"
-// });
-
-// Etape 2 : creation de la page login
-
-//Etape 2.2 : administrer la conexion (fichier login.js) + fonction pour verifier si le token est dans le localStorage
+//Administrer la conexion (fichier login.js) + fonction pour verifier si le token est dans le localStorage
 
 document.addEventListener("DOMContentLoaded", function() { // appel de la fonction pour verifier si le token est dans le localstorage
-   
     const token = localStorage.getItem('token'); // variable pour le token en localstorage
-
+    
     if (token) { // si token dans localstorage, alors j'affiche les elements adminMode
-        
         const elementsadmin = document.querySelectorAll('.adminMode') // je recupere tous les elements adminMode pour rendre visible
-
         elementsadmin.forEach(element => {
             element.style.display = 'flex';
         });
-        
     } else {
         // si le token n'existe pas, rien à changer
     }
