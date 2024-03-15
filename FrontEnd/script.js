@@ -83,6 +83,12 @@ function DisplayCategories(categories) {
         btn_filter.appendChild(button); // "gallery" est parent de <button>
         button.innerText = category.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
 
+        //cahcer les boutons en mode admin
+        if(localStorage.getItem('token')) { //si le token est dans le local storage
+            button.style.display = 'none';// je cache les boutons 
+            btn_all.style.display = 'none';
+        }
+
         // je veux une fonction sur chaque bouton qui affiche "work.categoryId = categorie.id"
         button.addEventListener("click", function () { 
             ClearWorks(); // jappel la fonction pour nettoyer la gallery
@@ -140,16 +146,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const token = localStorage.getItem('token');// je recupere le token dans le local storage
     const logoutBtn = document.querySelector('#logout');
     const loginBtn = document.querySelector('#login');
+    const btnFilter = document.querySelector('.btn_filter');
  
-    if(!token) { //si le token n'existe pas(utilisateur non connecté)
-        if(logoutBtn) {//je verfifie si l'element existe
-            logoutBtn.style.display = 'none';//masquer le logout
-        }
-    } else {// si le token existe
+    if(token) { //si le token existe (utilisateur non connecté)
         if(loginBtn) {
-            loginBtn.style.display = 'none';
+            loginBtn.style.display = 'none';//masquer le login
+        }
+        if(btnFilter) {
+            btnFilter.style.display = 'none';
+        }
+    } else {// si le token n'existe pas 
+        if(logoutBtn) {
+            logoutBtn.style.display = 'none';
         }
     }
+});
+
+//cacher les boutons de filtres une fois connecté :
+document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token');
+    const btn_filter = document.querySelector('btn_filter');
+ 
+    if(token) { //si le token existe (utilisateur non connecté)
+        if(btn_filter) {//je verfifie si l'element existe
+            btn_filter.style.display = 'none';//masquer le logout
+        }
+    } 
 });
 
 //addEvendListener pour ouvrir la modale 
@@ -166,7 +188,6 @@ modify.addEventListener('click', function(event) {
     modale.style.display = "flex";
     modaleDelete.style.display = "flex";
     modaleAdd.style.display = "none";
-
 });
 
 //Fonction pour afficher les travaux dans la modale 
@@ -320,6 +341,13 @@ function deleteWork(workId) {
     });
 }
 
+//Formulaire pour la modaleAdd
+
+
+
+
+
+
 //afficher l'image chargée dans la modaleAdd :
 
 function imageUpload(event) {
@@ -432,5 +460,3 @@ function checkInput() {
 titleInput.addEventListener('input', checkInput);
 categoryInput.addEventListener('change', checkInput);
 imageInput.addEventListener('change', checkInput);
-
-//Ajuster le focus :
