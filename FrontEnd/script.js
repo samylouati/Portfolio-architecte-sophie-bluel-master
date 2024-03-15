@@ -415,3 +415,5 @@ function checkInput() {
 titleInput.addEventListener('input', checkInput);
 categoryInput.addEventListener('change', checkInput);
 imageInput.addEventListener('change', checkInput);
+
+//Ajuster le focus :
