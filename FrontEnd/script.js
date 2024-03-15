@@ -135,6 +135,23 @@ logout.addEventListener('click', function() { //evenement au click > supprime le
     localStorage.removeItem('token');
 })
 
+//caché logout/login si déconnecté/connecté, donc si le token n'est pas/est dans le local storage : 
+document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token');// je recupere le token dans le local storage
+    const logoutBtn = document.querySelector('#logout');
+    const loginBtn = document.querySelector('#login');
+ 
+    if(!token) { //si le token n'existe pas(utilisateur non connecté)
+        if(logoutBtn) {//je verfifie si l'element existe
+            logoutBtn.style.display = 'none';//masquer le logout
+        }
+    } else {// si le token existe
+        if(loginBtn) {
+            loginBtn.style.display = 'none';
+        }
+    }
+});
+
 //addEvendListener pour ouvrir la modale 
 
 const modify = document.querySelector('#admin2');
