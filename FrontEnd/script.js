@@ -371,21 +371,22 @@ btnValidateAdd.addEventListener('click', function(event) {
 
     //je recupere les valeurs des titres et categories
     const title = document.querySelector('#title').value;
-    const category = document.querySelector('#categoryId').value;
+    const category = document.querySelector('#categoryId');
+    const categoryValue = category.value.trim();
 
     //je recupere le fichier image
     const file = document.querySelector('#imageUrl').files[0];
 
     //je verifie si les champs titre, categorie et l'image sont present
-    if(title.trim() ==='' || category.trim() ==='' || !file) {
-        alert('Veuillez compléter les champs(image, titre et catégorie');
+    if(!title.trim() || categoryValue ==='0' || !file) {
+        alert('Veuillez compléter les champs image, titre et catégorie');
         return; //je stop la fonction si les champs sont manquant
     }
 
     //creation des objets formData pour envoyer les données
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('category', category);
+    formData.append('category', categoryValue);
     formData.append('image', file);
 
     //Envoie des données vers l'API 
@@ -437,7 +438,8 @@ function checkInput() {
     const imageValue = imageInput.files[0];
 
     //verifier si tous les champs requis sont remplis 
-    if (titleValue !== '' && categoryValue !== '' && imageValue) {
+    if (!titleValue || categoryValue === '' || categoryValue === '0' || imageValue) {
+        alert('Veuillez compléter les champs image, titre et catégorie');
         //tous les champs sont rempli, activer le bouton valider
         btnValidateAdd2.disabled = false;
         btnValidateAdd2.classList.add('active');
