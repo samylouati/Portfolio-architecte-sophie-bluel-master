@@ -341,55 +341,6 @@ function deleteWork(workId) {
     });
 }
 
-// //Afficher la modaleAdd
-// function mdoaleAdd() {
-//     const modalAdd = document.createElement('aside');//je creer la balise aside qui contient toute la modaleAdd
-//     modalAdd.classList.add('modale', 'mdoaleAdd');
-
-//     //contenu de la modaleAdd (facon Seb) :
-//     modalAdd.innerHTML = `
-//         <div class="icons">
-//             <i class="fa-solid fa-arrow-left" id="previous"></i>
-//             <i class="fa-solid fa-xmark" id="closeModaleAdd"></i>
-//         </div>
-//         <div class="modaleTitle">
-//             <h2>Ajout photo</h2>
-//         </div>
-//         <div class="post">
-//             <i class="fa-regular fa-image" id="iconToHide"></i>
-//             <img src="" alt="Image chargée" id="uploadImage">
-//             <div class="custom-file-input" id="btnToHide">
-//                 <input type="file" id="imageUrl" name="file" accept="image/*"><br>
-//                 <label for="file">+Ajouter photo</label>
-//                 <p>jpg, png : 4mo max</p>
-//             </div>
-//         </div>
-//         <label for="title" class="modaleLabel">Titre</label>
-//         <input type="text" id="title" placeholder="">
-//         <label for="categoryId" class="modaleLabel">Catégorie</label>
-//         <select name="category" id="categoryId">
-//             <option value="1">Objets</option>
-//             <option value="2">Appartements</option>
-//             <option value="3">Hotels et restaurants</option>
-//         </select>
-//         <div class="border-bot"></div>
-//         <div class="btns">
-//             <input type="submit" id="btn_valider" value="valider" class="inactive">
-//         </div>`
-
-//         //j'ajoute la modaleAdd dans la modalesContainer:
-//         const modalesContainer = document.querySelector('modalesContainer');
-//         modalesContainer.appendChild(modalAdd);
-
-//         //addEventListener pour ouvrir la modaleAdd :
-//         const openModaleAdd = document.querySelector('#addPhoto');
-//         openModaleAdd.addEventListener('click', function() {
-//             modaleAdd.style.display = 'flex';
-//         });
-// }
-
-// modaleAdd();
-
 //afficher l'image chargée dans la modaleAdd :
 
 function imageUpload(event) {
