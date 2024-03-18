@@ -431,30 +431,27 @@ btnValidateAdd.addEventListener('click', function(event) {
     });
 });
 
-//customisation de l'ajout des projets : 
-const btnValidateAdd2 = document.querySelector('#btn_valider');
-
-//selections des champs d'entrée :
+//AddEventListener pour changer la couleur du bouton lorsque les elements sont ok 
 const titleInput = document.querySelector('#title');
 const categoryInput = document.querySelector('#categoryId');
-const imageInput = document.querySelector('#imageUrl');
+const ImageInput = document.querySelector('#imageUrl');
 
-//fonction pour verifier si tous les elements sont remplis:
-function checkInput() {
-    const titleValue = titleInput.value.trim();
+titleInput.addEventListener('input', CheckButton);
+categoryInput.addEventListener('change', CheckButton);
+imageUrlInput.addEventListener('change', CheckButton);
+
+//Fonction pour changer la couleur du bouton
+function CheckButton() {
+    const title = titleInput.value.trim();
     const categoryValue = categoryInput.value.trim();
-    const imageValue = imageInput.files[0];
+    const file = imageUrlInput.files[0];
 
-    //verifier si tous les champs requis sont remplis 
-    if (!titleValue || categoryValue === '' || categoryValue === '0' || imageValue) {
-        alert('Veuillez compléter les champs image, titre et catégorie');
-        //tous les champs sont rempli, activer le bouton valider
-        btnValidateAdd2.disabled = false;
-        btnValidateAdd2.classList.add('active');
-        btnValidateAdd2.classList.remove('inactive');
+    //verifier si les champs titre, categories et images sont rempli
+    if(title && categoryValue !== '0' && file) {
+        btnValidateAdd.classList.add('active');
+        btnValidateAdd.classList.remove('inactive');
     } else {
-        //au moins un champ est vide, desactiver le bouton :
-        btnValidateAdd2.disabled = true;
-        btnValidateAdd2.classList.remove('active');
+        btnValidateAdd.classList.add('inactive');
+        btnValidateAdd.classList.remove('active');
     }
 }
