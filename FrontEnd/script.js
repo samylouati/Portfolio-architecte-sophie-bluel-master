@@ -341,6 +341,14 @@ function deleteWork(workId) {
     });
 }
 
+//fonction pour effacer dans la modale 
+function deleteWorkInModale(workId) {
+    const elementToRemove = document.querySelector(`#modal-work-${workId}`);
+    if (elementToRemove) {
+        elementToRemove.style.display ='none';
+    }
+}
+
 //afficher l'image chargée dans la modaleAdd :
 
 function imageUpload(event) {
@@ -450,8 +458,3 @@ function checkInput() {
         btnValidateAdd2.classList.remove('active');
     }
 }
-
-//addEventListener pour surveiller les changements dans les champs d'entrée
-titleInput.addEventListener('input', checkInput);
-categoryInput.addEventListener('change', checkInput);
-imageInput.addEventListener('change', checkInput);
