@@ -208,14 +208,6 @@ function DisplayWorksInModale(works) {
                 article.remove();
                 //appel de la fonction pour supprimer l'element de l'API
                 deleteWork(work.id);
-
-                //verifier s'il reste d'autres articles dans la modale pour eviter qu'elle ne se ferme
-                const remainingArticles = document.querySelectorAll('.photosModale');
-                if (remainingArticles.length === 0) {
-                    //aucun article restant, fermer la modale
-                    const modale = document.querySelector('modalesContainer');
-                    modale.style.display = 'none';
-                }
             }
         });
 
@@ -224,6 +216,28 @@ function DisplayWorksInModale(works) {
         galleryModale.appendChild(article);
     })
 };
+
+//Fonction pour supprimer les elements dans la modaleDelete (ajouter à la modalDelete en addEventListener)
+
+function deleteWork(workId) {
+    fetch(`${API_BASE_URL}/works/${workId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la supression du travail');
+        }
+        console.log('travail supprimer avec succès');
+    })
+    .catch(error => {
+        if (error.name !== 'AbortError') {
+            console.error('Erreur lors de la suppression :', error);
+        }
+    });
+}
 
 //function displayworksinmodale version Seb :
 // function DisplayWorksInModale(works) {
@@ -306,28 +320,6 @@ modalesContainer.addEventListener('click', function(event) {
         modalesContainer.style.display = 'none'
     }
 });
-
-//Fonction pour supprimer les elements dans la modaleDelete (ajouter à la modalDelete en addEventListener)
-
-function deleteWork(workId) {
-    fetch(`${API_BASE_URL}/works/${workId}`, {
-        method: 'DELETE',
-        headers: {
-            Authorization: `Bearer ${localStorage.token}`,
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la supression du travail');
-        }
-        console.log('travail supprimer avec succès');
-    })
-    .catch(error => {
-        if (error.name !== 'AbortError') {
-            console.error('Erreur lors de la suppression :', error);
-        }
-    });
-}
 
 //afficher l'image chargée dans la modaleAdd :
 
