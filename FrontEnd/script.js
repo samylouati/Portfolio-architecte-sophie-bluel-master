@@ -321,33 +321,25 @@ modalesContainer.addEventListener('click', function(event) {
 
 //Fonction pour supprimer les elements dans la modaleDelete (ajouter à la modalDelete en addEventListener)
 
-function deleteWork(workId) {
-    fetch(`${API_BASE_URL}/works/${workId}`, {
-        method: 'DELETE',
-        headers: {
-            Authorization: `Bearer ${localStorage.token}`,
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la supression du travail');
-        }
-        console.log('travail supprimer avec succès');
-    })
-    .catch(error => {
-        if (error.name !== 'AbortError') {
-            console.error('Erreur lors de la suppression :', error);
-        }
-    });
-}
-
-//fonction pour effacer dans la modale 
-function deleteWorkInModale(workId) {
-    const elementToRemove = document.querySelector(`#modal-work-${workId}`);
-    if (elementToRemove) {
-        elementToRemove.style.display ='none';
-    }
-}
+// function deleteWork(workId) {
+//     fetch(`${API_BASE_URL}/works/${workId}`, {
+//         method: 'DELETE',
+//         headers: {
+//             Authorization: `Bearer ${localStorage.token}`,
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Erreur lors de la supression du travail');
+//         }
+//         console.log('travail supprimer avec succès');
+//     })
+//     .catch(error => {
+//         if (error.name !== 'AbortError') {
+//             console.error('Erreur lors de la suppression :', error);
+//         }
+//     });
+// }
 
 //afficher l'image chargée dans la modaleAdd :
 
@@ -422,9 +414,10 @@ btnValidateAdd.addEventListener('click', function(event) {
         //mettre à jours les nouveau projets :
         allWorks.push(newWork);//ajout de la nouvelle image aux projets existant
         DisplayWorks([newWork]);//afficher la nouvelle image sur le site
-        DisplayWorksInModale([newWork]);//afficher la nouvelle image dans la modale
-        modale.style.display = 'none';
-        modaleAdd.style.display = 'none';
+        //DisplayWorksInModale([newWork]);//afficher la nouvelle image dans la modale
+        getApiWorks().then(updateWorks => {
+            DisplayWorksInModale(updateWorks);
+        });        
     })
     .catch(error => {
         console.error('Erreur lors de lenvoie de limage :', error);
