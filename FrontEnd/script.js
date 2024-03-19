@@ -83,7 +83,7 @@ function DisplayCategories(categories) {
         btn_filter.appendChild(button); // "gallery" est parent de <button>
         button.innerText = category.name; // j'indique que le texte des balises <figcaption> est "title" dans le tableau
 
-        //cahcer les boutons en mode admin
+        //cacher les boutons en mode admin
         if(localStorage.getItem('token')) { //si le token est dans le local storage
             button.style.display = 'none';// je cache les boutons 
             btn_all.style.display = 'none';
