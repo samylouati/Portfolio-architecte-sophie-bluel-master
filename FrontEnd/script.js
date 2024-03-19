@@ -162,18 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//cacher les boutons de filtres une fois connecté :
-document.addEventListener('DOMContentLoaded', function() {
-    const token = localStorage.getItem('token');
-    const btn_filter = document.querySelector('btn_filter');
- 
-    if(token) { //si le token existe (utilisateur non connecté)
-        if(btn_filter) {//je verfifie si l'element existe
-            btn_filter.style.display = 'none';//masquer le logout
-        }
-    } 
-});
-
 //addEvendListener pour ouvrir la modale 
 
 const modify = document.querySelector('#admin2');
@@ -321,25 +309,25 @@ modalesContainer.addEventListener('click', function(event) {
 
 //Fonction pour supprimer les elements dans la modaleDelete (ajouter à la modalDelete en addEventListener)
 
-// function deleteWork(workId) {
-//     fetch(`${API_BASE_URL}/works/${workId}`, {
-//         method: 'DELETE',
-//         headers: {
-//             Authorization: `Bearer ${localStorage.token}`,
-//         }
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Erreur lors de la supression du travail');
-//         }
-//         console.log('travail supprimer avec succès');
-//     })
-//     .catch(error => {
-//         if (error.name !== 'AbortError') {
-//             console.error('Erreur lors de la suppression :', error);
-//         }
-//     });
-// }
+function deleteWork(workId) {
+    fetch(`${API_BASE_URL}/works/${workId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la supression du travail');
+        }
+        console.log('travail supprimer avec succès');
+    })
+    .catch(error => {
+        if (error.name !== 'AbortError') {
+            console.error('Erreur lors de la suppression :', error);
+        }
+    });
+}
 
 //afficher l'image chargée dans la modaleAdd :
 
