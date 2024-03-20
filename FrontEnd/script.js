@@ -392,7 +392,7 @@ function imageUpload(event) {
         //traité la reponse de l'API
         console.log('Reponse : ', data);
         //affichage d'un message 
-        alert('Votre projet a été enregistré avec succès!')
+        //alert('Votre projet a été enregistré avec succès!')
     })
     .then(newWork => {
         //mettre à jours les nouveau projets :
