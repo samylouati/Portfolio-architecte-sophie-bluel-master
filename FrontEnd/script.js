@@ -118,6 +118,8 @@ function ClearWorks() {
     gallery.innerHTML = ""; //permet de tout supprimer dans la gallery à l'appel de la fonction
 }
 
+
+
 //Administrer la conexion (fichier login.js) + fonction pour verifier si le token est dans le localStorage
 
 document.addEventListener("DOMContentLoaded", function() { // appel de la fonction pour verifier si le token est dans le localstorage
@@ -161,6 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
 
 //addEvendListener pour ouvrir la modale 
 
@@ -344,10 +348,10 @@ function imageUpload(event) {
     const imageUrlInput = document.querySelector('#imageUrl');
     imageUrlInput.addEventListener('change', imageUpload);
 
-//gerer l'envoie vers l'API :
-const btnValidateAdd = document.querySelector('#btn_valider');
-btnValidateAdd.addEventListener('click', function(event) {
-    event.preventDefault();//pour empecher le formulaire de soumaitre automatiquement
+    //gerer l'envoie vers l'API :
+    const btnValidateAdd = document.querySelector('#btn_valider');
+    btnValidateAdd.addEventListener('click', function(event) {
+        event.preventDefault();//pour empecher le formulaire de soumaitre automatiquement
 
     //je recupere les valeurs des titres et categories
     const title = document.querySelector('#title').value;
