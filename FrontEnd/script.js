@@ -31,7 +31,7 @@ getApiWorks().then(works => {
 
 function DisplayWorks(works) {
     const gallery = document.querySelector(".gallery"); // je recupere la "gallery" dans le DOM
-    works.forEach(work => { // pour chaque "work" dans "works" : 
+    works.forEach(work => { // pour chaque "work" dans "works" :
         const figure = document.createElement("figure"); // je crée une balise <figure>
         figure.classList.add("figure"); // j'applique le style "figure" sur chaque balise <figure>
         const images = document.createElement("img");
